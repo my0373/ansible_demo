@@ -4,18 +4,13 @@
   gather_facts: true
 
   tasks:
+
+  ## Create the Ansible users and groups
     - name: Create the Ansible group
       group:
         name: ansible
         state: present
         gid: 1337
-
-    - name: Remove the Ansible group
-      group:
-        name: ansible
-        state: absent
-      tags:
-        - clean
 
     - name: Create the Ansible user
       user:
@@ -26,11 +21,23 @@
         generate_ssh_key: yes
         state: present
 
-
+  ## Clean the Ansible users and groups
     - name: Remove the Ansible user
       user:
         name: ansible
         state: absent
       tags:
         - clean
+
+    - name: Remove the Ansible group
+      group:
+        name: ansible
+        state: absent
+      tags:
+        - clean
+
+
+
+
+
 
