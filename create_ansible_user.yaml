@@ -4,6 +4,7 @@
   gather_facts: true
   vars:
     public_key_file: "/root/ansible_user.pub"
+    temp_public_key_file: "/tmp/public_key_file.key"
 
   tasks:
 
@@ -26,7 +27,7 @@
     - name: Copy public key to the host
       copy:
         src: {{ public_key_file }}
-        dest: /tmp/public_key_file.key
+        dest: {{ temp_public_key_file }}
         owner: ansible
         group: ansible
         mode: 0644
