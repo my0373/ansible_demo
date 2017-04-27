@@ -4,11 +4,12 @@
   gather_facts: true
 
   tasks:
-  - user:
-    name: ansible
-    comment: "Ansible service account"
-    uid: 1337
-    group: ansible
-    generate_ssh_key: yes
+  - name: Create the Ansible user
+    user:
+    - name: ansible
+    - comment: "Ansible service account"
+    - uid: 1337
+    - group: ansible
+    - generate_ssh_key: yes
 
 
