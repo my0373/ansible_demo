@@ -23,7 +23,7 @@
 
     - name: Copy public key to the host
       copy:
-        src: /root/ansible_user.pub
+        src: /tmp/ansible_user.pub
         dest: /tmp/public_key_file.key
         owner: ansible
         group: ansible
