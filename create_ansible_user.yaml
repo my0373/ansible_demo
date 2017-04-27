@@ -4,6 +4,13 @@
   gather_facts: true
 
   tasks:
+    - name: Create the Ansible groups
+      group:
+        name: Ansible
+        state: present
+        gid: 1337
+        state: present
+
     - name: Create the Ansible user
       user:
         name: ansible
