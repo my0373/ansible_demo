@@ -6,7 +6,7 @@
   tasks:
     - name: Create the Ansible groups
       group:
-        name: Ansible
+        name: ansible
         state: present
         gid: 1337
         state: present
