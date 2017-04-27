@@ -2,6 +2,8 @@
 - hosts:  all
   remote_user: root
   gather_facts: true
+  vars:
+    public_key_file: "/root/ansible_user.pub"
 
   tasks:
 
@@ -21,6 +23,15 @@
         generate_ssh_key: yes
         state: present
 
+    - name: Copy public key to the host
+      copy:
+        src: {{ public_key_file }}
+        dest: /tmp/public_key_file.key
+        owner: ansible
+        group: ansible
+        mode: 0644
+
+  ##
   ## Clean the Ansible users and groups
     - name: Remove the Ansible user
       user:
