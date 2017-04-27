@@ -18,5 +18,6 @@
         uid: 1337
         group: ansible
         generate_ssh_key: yes
+        state: present
 
 
