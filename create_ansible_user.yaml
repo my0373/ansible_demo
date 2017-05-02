@@ -2,45 +2,48 @@
 - hosts:  all
   remote_user: root
   gather_facts: true
+  vars:
+    new_username: answorker
+    new_groupname: answorker
 
   tasks:
 
   ## Create the Ansible users and groups
     - name: Create the Ansible group
       group:
-        name: ansible
+        name: {{ new_groupname }}
         state: present
         gid: 1337
 
     - name: Create the Ansible user
       user:
-        name: ansible
+        name: {{ new_username }}
         comment: "Ansible service account"
         uid: 1337
-        group: ansible
+        group: {{ new_groupname }}
         generate_ssh_key: yes
         state: present
 
-    - name: Copy public key to the host
-      copy:
-        src: /tmp/ansible_user.pub
-        dest: /tmp/public_key_file.key
-        owner: ansible
-        group: ansible
-        mode: 0644
+#    - name: Copy public key to the host
+#      copy:
+#        src: /tmp/ansible_user.pub
+#        dest: /tmp/public_key_file.key
+#        owner: {{ new_username }}
+#        group: {{ new_groupname }}
+#        mode: 0644
 
   ##
   ## Clean the Ansible users and groups
     - name: Remove the Ansible user
       user:
-        name: ansible
+        name: {{ new_username }}
         state: absent
       tags:
         - clean
 
     - name: Remove the Ansible group
       group:
-        name: ansible
+        name: {{ new_groupname }}
         state: absent
       tags:
         - clean
